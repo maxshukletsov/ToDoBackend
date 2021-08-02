@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  todo_list:
+    build: ./
+    container_name: todo_list
+    restart: unless-stopped
+    ports:
+      - "3001:3001"

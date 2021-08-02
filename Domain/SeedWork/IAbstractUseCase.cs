@@ -7,7 +7,7 @@ namespace Domain.SeedWork
         Task<UseCaseResult<TDataType>> Work(TCommand command);
         Task<UseCaseResult<TDataType>> Invoke(TCommand command);
     }
-    
+
     public interface IAbstractUseCase<in TCommand> where TCommand : AbstractCommand
     {
         Task<UseCaseResult> Work(TCommand command);

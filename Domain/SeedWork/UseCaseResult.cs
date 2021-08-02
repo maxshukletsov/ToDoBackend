@@ -7,16 +7,16 @@ namespace Domain.SeedWork
         public UseCaseStatus Status;
         public string? Message;
         public TDataType Data;
-        
+
         public void Deconstruct(out UseCaseStatus status, out TDataType? data, out string? message) =>
-                    (status, data, message) = (Status, Data, Message);
+            (status, data, message) = (Status, Data, Message);
     }
 
     public record UseCaseResult
     {
         public UseCaseStatus Status;
         public string? Message;
-        
+
         public void Deconstruct(out UseCaseStatus status, out string? message) =>
             (status, message) = (Status, Message);
     }

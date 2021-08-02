@@ -24,11 +24,10 @@ using Microsoft.Extensions.Options;
 namespace API
 {
     public class Startup
-    {   
+    {
         readonly string AllowSpecificOrigins = "_AllowSpecificOrigins";
-        
-        
-        
+
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -42,16 +41,12 @@ namespace API
             services.AddCors(options =>
             {
                 options.AddPolicy(name: AllowSpecificOrigins,
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin().AllowAnyHeader();
-
-                    });
+                    builder => { builder.AllowAnyOrigin().AllowAnyHeader(); });
             });
 
             // services.AddResponseCaching();
             services.AddControllers();
-            
+
             services.AddDbContext<DataAccess.DatabaseContext>(opt => opt.UseInMemoryDatabase("ToDoList"));
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "API", Version = "v1"}); });
             services.AddTransient<IToDoRepository, ToDoRepositories>();
@@ -61,7 +56,7 @@ namespace API
             services.AddTransient<IGetToDoListUseCase, GetToDoListUseCase>();
             services.AddTransient<IUpdateToDoUseCase, UpdateToDoUseCase>();
             services.AddTransient<IDoneToDoUseCase, DoneToDoUseCase>();
-            
+
             services.AddAutoMapper(typeof(Startup));
         }
 
@@ -73,7 +68,6 @@ namespace API
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
-                
             }
 
             app.UseHttpsRedirection();

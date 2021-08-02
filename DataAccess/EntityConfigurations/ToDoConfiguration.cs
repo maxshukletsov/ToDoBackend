@@ -9,11 +9,11 @@ namespace DataAccess.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<ToDo> builder)
         {
-            builder.Property(c => c.id).ValueGeneratedOnAdd();
-            builder.Property(c => c.Title).IsRequired();
-            builder.Property(c => c.DateCreated).HasDefaultValueSql("NOW()");
-            builder.Property(c => c.DateEnding).IsRequired();
-            builder.Property(c => c.End).HasDefaultValue(false);
+            builder.Property(td => td.Id).ValueGeneratedOnAdd();
+            builder.Property(td => td.Title).IsRequired();
+            builder.Property(td => td.DateCreated).HasDefaultValueSql("NOW()");
+            builder.Property(td => td.DateEnding).IsRequired();
+            builder.Property(td => td.End).HasDefaultValue(false);
         }
     }
 }

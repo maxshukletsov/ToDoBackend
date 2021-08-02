@@ -21,11 +21,11 @@ namespace DataAccess.Repositories
             //var list = await _dbContext.ToDo.Where(a => a.End == manage).ToListAsync();
             return list;
         }
-             
+
 
         public async Task<ToDo> Get(int id)
         {
-            return await _dbContext.ToDo.FirstOrDefaultAsync(x => x.id == id);
+            return await _dbContext.ToDo.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<ToDo> Add(ToDo toDo)
@@ -37,7 +37,6 @@ namespace DataAccess.Repositories
 
         public async Task<ToDo> Update(int id, ToDo toDo)
         {
-            
             _dbContext.ToDo.Update(toDo);
             await _dbContext.SaveChangesAsync();
             return await Get(id);

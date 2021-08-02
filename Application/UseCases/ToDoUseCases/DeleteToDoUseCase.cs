@@ -14,6 +14,7 @@ namespace Application.UseCases.ToDoUseCases
         {
             _toDoRepository = toDoRepository;
         }
+
         public override async Task<UseCaseResult> Work(DeleteTodoCommand command)
         {
             var deletedToDo = await _toDoRepository.Delete(command.Id);

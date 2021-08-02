@@ -18,7 +18,7 @@ namespace Application.UseCases.ToDoUseCases
         public override async Task<UseCaseResult<ToDo>> Work(UpdateTodoCommand command)
         {
             var updatedToDo = await _toDoRepository.Update(command.Id, command.ToDo);
-            return Result.Ok(updatedToDo,$"Объект {command.Id} обновлен успешно");
+            return Result.Ok(updatedToDo, $"Объект {command.Id} обновлен успешно");
         }
     }
 }

@@ -1,18 +1,9 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 using System.Threading.Tasks;
-using DataAccess;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Domain.ToDo.Entity;
-using DataAccess.Repositories;
 using API.ApiModels;
-using API.Extensions;
 using AutoMapper;
-using Domain.SeedWork;
 using Domain.ToDo.Port;
 using Domain.ToDo.UseCases;
 

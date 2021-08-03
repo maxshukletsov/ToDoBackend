@@ -8,6 +8,6 @@ namespace API.ApiModels
         public string Title { get; init; }
         public DateTime DateCreated { get; init; }
         public DateTime DateEnding { get; init; }
-        public bool End { get; init; } = false;
+        public bool End { get; init; }
     }
 }

@@ -18,7 +18,7 @@ namespace Application.UseCases.ToDoUseCases
         public override async Task<UseCaseResult> Work(DoneTodoCommand command)
         {
             var doneToDo = await _toDoRepository.Done(command.Id);
-            return Result.Ok(message: "Выполнено");
+            return Result.Ok(message: $"Задача {doneToDo.Id} выполнена");
         }
     }
 }

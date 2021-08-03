@@ -11,6 +11,7 @@ namespace API.Mappers
         {
             CreateMap<ToDoResponseModel, ToDo>();
             CreateMap<ToDo, ToDoResponseModel>();
+            CreateMap<ToDoDTO, ToDo>();
         }
     }
 }

@@ -47,7 +47,7 @@ namespace DataAccess.Repositories
             var toDo = await Get(id);
             _dbContext.ToDo.Remove(toDo);
             await _dbContext.SaveChangesAsync();
-            return "Deleted";
+            return $"Задача {id} удалена";
         }
 
         public async Task<ToDo> Done(int id)

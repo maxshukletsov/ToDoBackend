@@ -12,6 +12,10 @@ namespace API.Mappers
             CreateMap<ToDoResponseModel, ToDo>();
             CreateMap<ToDo, ToDoResponseModel>();
             CreateMap<ToDoDTO, ToDo>();
+            CreateMap<ToDo, ToDo>()
+                .ForMember(
+                    todo => todo.Id, 
+                    opt => opt.Ignore());
         }
     }
 }

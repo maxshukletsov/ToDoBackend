@@ -83,7 +83,7 @@ namespace API.Controllers
             var (status, data, message) = await _updateToDoUseCase.Invoke(new UpdateTodoCommand
             {
                 Id = id,
-                ToDo = new ToDo {Id = id, Title = toDoDTO.Title, DateEnding = toDoDTO.DateEnding,}
+                ToDo = _mapper.Map<ToDo>(toDoDTO)
             });
             var responseData = _mapper.Map<ToDoResponseModel>(data);
             return ApiResult.Send(status, responseData, message, ModelState, 200);

@@ -1,6 +1,5 @@
 using API.ApiModels;
 using AutoMapper;
-using AutoMapper.Mappers;
 using Domain.ToDo.Entity;
 
 namespace API.Mappers

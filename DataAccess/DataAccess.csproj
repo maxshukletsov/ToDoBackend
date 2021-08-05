@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="5.6.0" />
         <ProjectReference Include="..\Domain\Domain.csproj" />
       <PackageReference Include="EntityFramework" Version="6.4.4" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />

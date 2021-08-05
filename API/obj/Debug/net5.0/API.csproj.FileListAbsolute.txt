@@ -77,3 +77,5 @@
 /home/maxshukletsov/RiderProjects/ToDoBackend/API/bin/Debug/net5.0/AutoMapper.dll
 /home/maxshukletsov/RiderProjects/ToDoBackend/API/bin/Debug/net5.0/AutoMapper.Collection.dll
 /home/maxshukletsov/RiderProjects/ToDoBackend/API/bin/Debug/net5.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/home/maxshukletsov/RiderProjects/ToDoBackend/API/bin/Debug/net5.0/BCrypt.Net-Next.dll
+/home/maxshukletsov/RiderProjects/ToDoBackend/API/bin/Debug/net5.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll

@@ -25,7 +25,7 @@ namespace API.Result
             int okHttpStatus = 200) =>
             status switch
             {
-                UseCaseStatus.Ok => new ObjectResult(new ApiDeletedResponseModel(message)){StatusCode = okHttpStatus},
+                UseCaseStatus.Ok => new ObjectResult(new ApiDeletedResponseModel(message)) {StatusCode = okHttpStatus},
             };
 
         public record ApiSuccessResponseModel<TResponseData>(string? message, TResponseData data);

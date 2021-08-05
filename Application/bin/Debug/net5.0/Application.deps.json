@@ -11,6 +11,7 @@
           "AutoMapper": "10.1.1",
           "AutoMapper.Collection": "7.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.1.1",
+          "BCrypt.Net-Next": "4.0.2",
           "DataAccess": "1.0.0",
           "Domain": "1.0.0"
         },
@@ -51,6 +52,14 @@
           "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.1.1.0"
+          }
+        }
+      },
+      "BCrypt.Net-Next/4.0.2": {
+        "runtime": {
+          "lib/net5.0/BCrypt.Net-Next.dll": {
+            "assemblyVersion": "4.0.2.0",
+            "fileVersion": "4.0.2.0"
           }
         }
       },
@@ -1171,7 +1180,8 @@
           "Microsoft.EntityFrameworkCore.Abstractions": "5.0.0",
           "Microsoft.EntityFrameworkCore.InMemory": "5.0.0",
           "Microsoft.EntityFrameworkCore.Relational": "5.0.0",
-          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.0"
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.0",
+          "Microsoft.IdentityModel.JsonWebTokens": "5.6.0"
         },
         "runtime": {
           "DataAccess.dll": {}
@@ -1210,6 +1220,13 @@
       "sha512": "sha512-xSWoVzOipuDU4PeZcUfaZQ+xqXU8QmGv5jrdlxt3MYm9xaOmrefqcfzGQ3SQ+D+8wfBa/ZwSuL0qKOVj080inA==",
       "path": "automapper.extensions.microsoft.dependencyinjection/8.1.1",
       "hashPath": "automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512"
+    },
+    "BCrypt.Net-Next/4.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-LyNKpIpr4GraRD9+xlTviyxxbZpF6J4xJf7DvraC1mR8PSN/KonGc4rt8C/fjkD3vaEvgA7BcvsbHFCOjgczyQ==",
+      "path": "bcrypt.net-next/4.0.2",
+      "hashPath": "bcrypt.net-next.4.0.2.nupkg.sha512"
     },
     "EntityFramework/6.4.4": {
       "type": "package",

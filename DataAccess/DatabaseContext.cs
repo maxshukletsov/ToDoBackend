@@ -1,5 +1,6 @@
 ﻿using DataAccess.EntityConfigurations;
 using Domain.ToDo.Entity;
+using Domain.User.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
@@ -16,5 +17,6 @@ namespace DataAccess
         }
 
         public DbSet<ToDo> ToDo { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }

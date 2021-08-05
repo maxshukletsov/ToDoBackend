@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "esuLfGf11jG67IiKwG48CflpJxNmpLCTSWhocmXPQEtTU+UO1mAJcENocX+aj+UuWC3YA6OMc6RHlp/R04CQ/g==",
+  "dgSpecHash": "zlejo8KZrnWJchj7XVRpWm+UtQL7ogAPzIEAQu+etiMa5LERW0VoyQp2Np5AK2XSwa9atFA4lc8aFMsdOHtjCQ==",
   "success": true,
   "projectFilePath": "/home/maxshukletsov/RiderProjects/ToDoBackend/DataAccess/DataAccess.csproj",
   "expectedPackageFiles": [

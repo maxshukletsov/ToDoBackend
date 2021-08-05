@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "LxtML7s02H3JnqEdbjVZ1gCnYtJfhmUv5ZYKpIEqWtT22bqaPtZrA27/0/m8kowQXCPFM+HcPz75Y/Fq9FjVcg==",
+  "dgSpecHash": "dymd4G8BJBr6P8fe0fzi3BDkZeQjKAZJuOg1lsfABL7shJTHIQRwFN3DgT50jz9fRwGEcY75RkAg4Irvav480g==",
   "success": true,
   "projectFilePath": "/home/maxshukletsov/RiderProjects/ToDoBackend/Application/Application.csproj",
   "expectedPackageFiles": [
     "/home/maxshukletsov/.nuget/packages/automapper/10.1.1/automapper.10.1.1.nupkg.sha512",
     "/home/maxshukletsov/.nuget/packages/automapper.collection/7.0.1/automapper.collection.7.0.1.nupkg.sha512",
     "/home/maxshukletsov/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/8.1.1/automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
+    "/home/maxshukletsov/.nuget/packages/bcrypt.net-next/4.0.2/bcrypt.net-next.4.0.2.nupkg.sha512",
     "/home/maxshukletsov/.nuget/packages/entityframework/6.4.4/entityframework.6.4.4.nupkg.sha512",
     "/home/maxshukletsov/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/home/maxshukletsov/.nuget/packages/microsoft.data.sqlclient/2.0.1/microsoft.data.sqlclient.2.0.1.nupkg.sha512",

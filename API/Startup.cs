@@ -1,24 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Application.UseCases.AuthUseCases;
 using Application.UseCases.ToDoUseCases;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using DataAccess;
 using DataAccess.Repositories;
+using Domain.Auth;
 using Domain.ToDo.Port;
 using Domain.ToDo.UseCases;
+using Domain.User.Port;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 
 namespace API
@@ -38,6 +33,7 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //add CORS policy 
             services.AddCors(options =>
             {
                 options.AddPolicy(name: AllowSpecificOrigins,
@@ -46,16 +42,38 @@ namespace API
 
             // services.AddResponseCaching();
             services.AddControllers();
+            
+            // add Auth
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = AuthOptions.Issuer,
+                        ValidateAudience = true,
+                        ValidAudience = AuthOptions.Audience,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+                        ValidateIssuerSigningKey = true,
+                    };
+                }
+            );
 
             services.AddDbContext<DataAccess.DatabaseContext>(opt => opt.UseInMemoryDatabase("ToDoList"));
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "API", Version = "v1"}); });
             services.AddTransient<IToDoRepository, ToDoRepositories>();
+            services.AddTransient<IUserRepository, UserRepositories>();
             services.AddTransient<IAddToDoUseCase, AddToDoUseCase>();
             services.AddTransient<IDeleteToDoUseCase, DeleteToDoUseCase>();
             services.AddTransient<IGetToDoUseCase, GetToDoUseCase>();
             services.AddTransient<IGetToDoListUseCase, GetToDoListUseCase>();
             services.AddTransient<IUpdateToDoUseCase, UpdateToDoUseCase>();
             services.AddTransient<IDoneToDoUseCase, DoneToDoUseCase>();
+            services.AddTransient<IRegistrationUseCase, RegistrationUseCase>();
+            services.AddTransient<ILoginUseCase, LoginUseCase>();
+            services.AddTransient<IAuthService, AuthService>();
 
             services.AddAutoMapper(typeof(Startup));
         }

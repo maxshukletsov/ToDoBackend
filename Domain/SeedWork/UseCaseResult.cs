@@ -23,6 +23,7 @@ namespace Domain.SeedWork
 
     public static class Result
     {
+        
         public static UseCaseResult<TDataType> Ok<TDataType>(TDataType data, string message = "") =>
             new() { Status = UseCaseStatus.Ok, Data = data, Message = message };
 

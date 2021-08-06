@@ -6,4 +6,4 @@ services:
     container_name: todo_list
     restart: unless-stopped
     ports:
-      - "3001:3001"
+      - "5001:5001"

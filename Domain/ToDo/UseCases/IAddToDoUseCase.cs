@@ -9,5 +9,6 @@ namespace Domain.ToDo.UseCases
     public record AddToDoCommand : AbstractCommand
     {
         public Entity.ToDo ToDo { get; init; }
+        public string User { get; init; }
     }
 }

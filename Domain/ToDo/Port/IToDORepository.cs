@@ -8,7 +8,7 @@ namespace Domain.ToDo.Port
 {
     public interface IToDoRepository
     {
-        Task<IEnumerable<Entity.ToDo>> GetList(bool manage = true);
+        Task<IEnumerable<Entity.ToDo>> GetList(User.Entity.User user);
 
         Task<Entity.ToDo> Get(int id);
 

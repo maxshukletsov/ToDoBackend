@@ -5,13 +5,16 @@ using Domain.ToDo.Entity;
 using API.ApiModels;
 using API.Result;
 using AutoMapper;
-using Domain.ToDo.Port;
 using Domain.ToDo.UseCases;
+using Domain.User.UseCases;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class TasksController : ControllerBase
     {
         private readonly IAddToDoUseCase _addToDoUseCase;
@@ -22,6 +25,9 @@ namespace API.Controllers
         private readonly IUpdateToDoUseCase _updateToDoUseCase;
         private readonly IMapper _mapper;
 
+        private readonly IGetUserUseCase _getUserUseCase;
+        private readonly UserMiddleware _userMiddleware;
+
         public TasksController(
             IAddToDoUseCase addToDoUseCase,
             IDeleteToDoUseCase deleteToDoUseCase,
@@ -29,7 +35,9 @@ namespace API.Controllers
             IGetToDoUseCase getToDoUseCase,
             IGetToDoListUseCase getToDoListUseCase,
             IUpdateToDoUseCase updateToDoUseCase,
-            IMapper mapper
+            IMapper mapper,
+            IGetUserUseCase getUserUseCase,
+            UserMiddleware userMiddleware
         )
         {
             _addToDoUseCase = addToDoUseCase;
@@ -39,13 +47,15 @@ namespace API.Controllers
             _getToDoListUseCase = getToDoListUseCase;
             _updateToDoUseCase = updateToDoUseCase;
             _mapper = mapper;
+            _getUserUseCase = getUserUseCase;
+            _userMiddleware = userMiddleware;
         }
-
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ToDoResponseModel>>> Get()
         {
-            var (status, data, message) = await _getToDoListUseCase.Invoke(new GetTodoListCommand());
+            var user = await _userMiddleware.GetContext();
+            var (status, data, message) = await _getToDoListUseCase.Invoke(new GetTodoListCommand { User = user.User });
             var responseData = _mapper.Map<IEnumerable<ToDoResponseModel>>(data);
             return ApiResult.Send(status, responseData, message, ModelState, 200);
         }
@@ -54,7 +64,7 @@ namespace API.Controllers
         [Route("{id}")]
         public async Task<ActionResult<ToDoResponseModel>> Get(int id)
         {
-            var (status, data, message) = await _getToDoUseCase.Invoke(new GetTodoCommand {Id = id});
+            var (status, data, message) = await _getToDoUseCase.Invoke(new GetTodoCommand { Id = id });
             var responseData = _mapper.Map<ToDoResponseModel>(data);
             return ApiResult.Send(status, responseData, message, ModelState, 200);
         }
@@ -62,8 +72,11 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<ToDoResponseModel>> Post(ToDoDTO toDoDTO)
         {
+            var user = await _userMiddleware.GetContext();
+            var (userstatus, userdata, usermessage) =
+                await _getUserUseCase.Invoke(new GetUserCommand { EMail = user.User.Email });
             var (status, data, message) = await _addToDoUseCase.Invoke(new AddToDoCommand
-                {ToDo = new ToDo {Title = toDoDTO.Title, DateEnding = toDoDTO.DateEnding}});
+                { ToDo = new ToDo { Title = toDoDTO.Title, DateEnding = toDoDTO.DateEnding, User = userdata } });
             var responseData = _mapper.Map<ToDoResponseModel>(data);
             return ApiResult.Send(status, responseData, message, ModelState, 200);
         }
@@ -72,7 +85,7 @@ namespace API.Controllers
         [Route("{id}/delete")]
         public async Task<ActionResult<string>> Delete(int id)
         {
-            var (status, message) = await _deleteToDoUseCase.Invoke(new DeleteTodoCommand {Id = id});
+            var (status, message) = await _deleteToDoUseCase.Invoke(new DeleteTodoCommand { Id = id });
             return ApiResult.Send(status, message, ModelState, 200);
         }
 
@@ -93,7 +106,7 @@ namespace API.Controllers
         [Route("{id}/done")]
         public async Task<ActionResult<ToDoResponseModel>> Done(int id)
         {
-            var (status, message) = await _doneToDoUseCase.Invoke(new DoneTodoCommand {Id = id});
+            var (status, message) = await _doneToDoUseCase.Invoke(new DoneTodoCommand { Id = id });
             return ApiResult.Send(status, message, ModelState, 200);
         }
     }

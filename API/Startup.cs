@@ -1,5 +1,7 @@
+using API.Config.UseCases;
 using Application.UseCases.AuthUseCases;
 using Application.UseCases.ToDoUseCases;
+using Application.UseCases.UserUseCases;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +13,7 @@ using Domain.Auth;
 using Domain.ToDo.Port;
 using Domain.ToDo.UseCases;
 using Domain.User.Port;
+using Domain.User.UseCases;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -42,7 +45,7 @@ namespace API
 
             // services.AddResponseCaching();
             services.AddControllers();
-            
+
             // add Auth
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
                 {
@@ -62,19 +65,14 @@ namespace API
             );
 
             services.AddDbContext<DataAccess.DatabaseContext>(opt => opt.UseInMemoryDatabase("ToDoList"));
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "API", Version = "v1"}); });
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" }); });
             services.AddTransient<IToDoRepository, ToDoRepositories>();
             services.AddTransient<IUserRepository, UserRepositories>();
-            services.AddTransient<IAddToDoUseCase, AddToDoUseCase>();
-            services.AddTransient<IDeleteToDoUseCase, DeleteToDoUseCase>();
-            services.AddTransient<IGetToDoUseCase, GetToDoUseCase>();
-            services.AddTransient<IGetToDoListUseCase, GetToDoListUseCase>();
-            services.AddTransient<IUpdateToDoUseCase, UpdateToDoUseCase>();
-            services.AddTransient<IDoneToDoUseCase, DoneToDoUseCase>();
-            services.AddTransient<IRegistrationUseCase, RegistrationUseCase>();
-            services.AddTransient<ILoginUseCase, LoginUseCase>();
-            services.AddTransient<IAuthService, AuthService>();
-
+            services.AddTransient<IGetUserUseCase, GetUserUseCase>();
+            ConfigureToDoUseCases.ConfigureServices(services);
+            ConfigureAuthUseCases.ConfigureServices(services);
+            services.AddHttpContextAccessor();
+            services.AddTransient<UserMiddleware>();
             services.AddAutoMapper(typeof(Startup));
         }
 
@@ -92,7 +90,6 @@ namespace API
 
             app.UseRouting();
             app.UseCors(AllowSpecificOrigins);
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

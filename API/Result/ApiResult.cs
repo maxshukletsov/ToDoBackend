@@ -1,3 +1,4 @@
+#nullable enable
 using Domain.SeedWork;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -28,8 +29,8 @@ namespace API.Result
                 UseCaseStatus.Ok => new ObjectResult(new ApiDeletedResponseModel(message)) {StatusCode = okHttpStatus},
             };
 
-        public record ApiSuccessResponseModel<TResponseData>(string? message, TResponseData data);
+        public record ApiSuccessResponseModel<TResponseData>(string? Message, TResponseData Data);
 
-        public record ApiDeletedResponseModel(string? message);
+        public record ApiDeletedResponseModel(string? Message);
     }
 }

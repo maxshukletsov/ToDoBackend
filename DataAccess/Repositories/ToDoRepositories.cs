@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.ToDo.Entity;
 using Domain.ToDo.Port;
+using Domain.User.Entity;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories
@@ -15,10 +16,10 @@ namespace DataAccess.Repositories
         public ToDoRepositories(DatabaseContext dbcontext) =>
             _dbContext = dbcontext;
 
-        public async Task<IEnumerable<ToDo>> GetList(bool manage = false)
+        public async Task<IEnumerable<ToDo>> GetList(User user)
         {
-            var list = await _dbContext.ToDo.ToListAsync();
-            //var list = await _dbContext.ToDo.Where(a => a.End == manage).ToListAsync();
+            //var list = await _dbContext.ToDo.ToListAsync();
+            var list = await _dbContext.ToDo.Where(td => td.User == user).ToListAsync();
             return list;
         }
 

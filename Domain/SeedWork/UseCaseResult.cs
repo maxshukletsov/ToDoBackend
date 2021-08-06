@@ -24,9 +24,9 @@ namespace Domain.SeedWork
     public static class Result
     {
         public static UseCaseResult<TDataType> Ok<TDataType>(TDataType data, string message = "") =>
-            new() {Status = UseCaseStatus.Ok, Data = data, Message = message};
+            new() { Status = UseCaseStatus.Ok, Data = data, Message = message };
 
         public static UseCaseResult Ok(string message = "") =>
-            new() {Status = UseCaseStatus.Ok, Message = message};
+            new() { Status = UseCaseStatus.Ok, Message = message };
     }
 }

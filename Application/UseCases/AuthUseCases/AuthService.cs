@@ -47,7 +47,8 @@ namespace Application.UseCases.AuthUseCases
         }
 
 
-        public JwtSecurityToken AssignJwtSecurityToken(ClaimsIdentity identity) => new(
+        public JwtSecurityToken AssignJwtSecurityToken(ClaimsIdentity identity) => 
+            new(
             AuthOptions.Issuer,
             AuthOptions.Audience,
             notBefore: DateTime.Now,

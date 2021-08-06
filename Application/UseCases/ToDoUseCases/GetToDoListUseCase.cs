@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.SeedWork;
@@ -19,8 +18,8 @@ namespace Application.UseCases.ToDoUseCases
 
         public override async Task<UseCaseResult<IEnumerable<ToDo>>> Work(GetTodoListCommand command)
         {
-            var toDoList = await _toDoRepository.GetList();
-            return Result.Ok(data: toDoList, message: "Список успешно загружен");
+            var toDoList = await _toDoRepository.GetList(command.User);
+            return Result.Ok(data: toDoList, message: $"Список пользователя {command.User.Email} успешно загружен");
         }
     }
 }

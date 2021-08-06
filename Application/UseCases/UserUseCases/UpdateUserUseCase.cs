@@ -1,8 +1,5 @@
 using System.Threading.Tasks;
 using Domain.SeedWork;
-using Domain.ToDo.Entity;
-using Domain.ToDo.Port;
-using Domain.ToDo.UseCases;
 using AutoMapper;
 using Domain.User.Entity;
 using Domain.User.Port;

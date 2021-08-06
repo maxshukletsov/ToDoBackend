@@ -9,7 +9,5 @@ namespace Application.UseCases.AuthUseCases
         public Task<ClaimsIdentity> GetIdentity(string email, string password);
         public Task<ClaimsIdentity> GetAnonymousIdentity(string email);
         public JwtSecurityToken AssignJwtSecurityToken(ClaimsIdentity identity);
-        //public bool VerifyPassword(string password, string hashedPassword);
-        //public string EncryptPassword(string password);
     }
 }

@@ -9,5 +9,6 @@ namespace Domain.ToDo.UseCases
     public record DeleteTodoCommand : AbstractCommand
     {
         public int Id { get; init; }
+        public string User { get; init; }
     }
 }

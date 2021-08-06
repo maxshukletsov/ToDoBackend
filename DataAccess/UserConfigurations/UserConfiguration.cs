@@ -10,6 +10,8 @@ namespace DataAccess.UserConfigurations
         {
             builder.Property(u => u.Email).IsRequired();
             builder.Property(u => u.Password).IsRequired();
+            builder.HasMany(u => u.ToDo)
+                .WithOne(u => u.User);
         }
     }
 }

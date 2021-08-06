@@ -30,7 +30,7 @@ namespace API.Controllers
         [HttpPost("signIn")]
         public async Task<ActionResult<LoginResponseModel>> Login(UserDTO dto)
         {
-            var (status, accessToken, message) = await _loginUseCase.Invoke(new LoginCommand(dto.Email, dto.Password));
+            var (status, accessToken, message) = await _loginUseCase.Invoke(new LoginCommand(dto.EMail, dto.Password));
             var responseData = new LoginResponseModel(accessToken);
             return ApiResult.Send(status, responseData, message, ModelState);
         }
@@ -40,7 +40,7 @@ namespace API.Controllers
         {
             var (status, user, message) = await _registrationUseCase.Invoke(new RegistrationCommand
             {
-                User = new User { Email = dto.Email, Password = dto.Password }
+                User = new User { Email = dto.EMail, Password = dto.Password }
             });
             var responseData = _mapper.Map<UserResponseModel>(user);
             return ApiResult.Send(status, responseData, message, ModelState, 200);

@@ -12,5 +12,7 @@ namespace Domain.ToDo.Entity
         public DateTime DateEnding { get; set; }
 
         public bool End { get; set; }
-    }
+        
+        public User.Entity.User User { get; set; }
+    };
 }

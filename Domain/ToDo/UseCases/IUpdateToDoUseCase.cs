@@ -10,5 +10,6 @@ namespace Domain.ToDo.UseCases
     {
         public int Id { get; init; }
         public Entity.ToDo ToDo { get; init; }
+        public string User { get; init; }
     }
 }

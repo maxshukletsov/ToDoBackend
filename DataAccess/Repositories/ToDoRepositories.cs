@@ -43,21 +43,19 @@ namespace DataAccess.Repositories
             return await Get(id);
         }
 
-        public async Task<String> Delete(int id)
+        public async Task<String> Delete(ToDo toDo)
         {
-            var toDo = await Get(id);
             _dbContext.ToDo.Remove(toDo);
             await _dbContext.SaveChangesAsync();
-            return $"Задача {id} удалена";
+            return $"Задача {toDo.Id} удалена";
         }
 
-        public async Task<ToDo> Done(int id)
+        public async Task<ToDo> Done(ToDo toDo)
         {
-            var todo = await Get(id);
-            todo.End = true;
-            _dbContext.ToDo.Update(todo);
+            
+            _dbContext.ToDo.Update(toDo with{End = true});
             await _dbContext.SaveChangesAsync();
-            return await Get(id);
+            return await Get(toDo.Id);
         }
     }
 }

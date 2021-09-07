@@ -5,6 +5,7 @@ using Domain.ToDo.Entity;
 using API.ApiModels;
 using API.Result;
 using AutoMapper;
+using Domain.SeedWork;
 using Domain.ToDo.UseCases;
 using Domain.User.UseCases;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -64,7 +65,8 @@ namespace API.Controllers
         [Route("{id}")]
         public async Task<ActionResult<ToDoResponseModel>> Get(int id)
         {
-            var (status, data, message) = await _getToDoUseCase.Invoke(new GetTodoCommand { Id = id });
+            var context = await _userMiddleware.GetContext();
+            var (status, data, message) = await _getToDoUseCase.Invoke(new GetTodoCommand { Id = id, User = context.User });
             var responseData = _mapper.Map<ToDoResponseModel>(data);
             return ApiResult.Send(status, responseData, message, ModelState, 200);
         }
@@ -72,11 +74,9 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<ToDoResponseModel>> Post(ToDoDTO toDoDTO)
         {
-            var user = await _userMiddleware.GetContext();
-            var (userstatus, userdata, usermessage) =
-                await _getUserUseCase.Invoke(new GetUserCommand { EMail = user.User.Email });
+            var context = await _userMiddleware.GetContext();
             var (status, data, message) = await _addToDoUseCase.Invoke(new AddToDoCommand
-                { ToDo = new ToDo { Title = toDoDTO.Title, DateEnding = toDoDTO.DateEnding, User = userdata } });
+                { ToDo = new ToDo { Title = toDoDTO.Title, DateEnding = toDoDTO.DateEnding, User = context.User } });
             var responseData = _mapper.Map<ToDoResponseModel>(data);
             return ApiResult.Send(status, responseData, message, ModelState, 200);
         }

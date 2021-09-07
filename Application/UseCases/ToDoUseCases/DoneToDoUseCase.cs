@@ -16,7 +16,12 @@ namespace Application.UseCases.ToDoUseCases
 
         public override async Task<UseCaseResult> Work(DoneTodoCommand command)
         {
-            var doneToDo = await _toDoRepository.Done(command.Id);
+            var toDo = await _toDoRepository.Get(command.Id);
+            if (toDo == null)
+                return Result.NotFound($"Задача с id: {command.Id} не найдена");
+            if (command.User != null && toDo.User != command.User)
+                return Result.Forbidden("У вас нет доступа к этой задаче");
+            var doneToDo = await _toDoRepository.Done(toDo);
             return Result.Ok(message: $"Задача {doneToDo.Id} выполнена");
         }
     }

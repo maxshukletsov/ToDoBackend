@@ -16,8 +16,8 @@ namespace Domain.ToDo.Port
 
         Task<Entity.ToDo> Update(int id, Entity.ToDo toDo);
 
-        Task<String> Delete(int id);
+        Task<String> Delete(Entity.ToDo toDo);
 
-        Task<Entity.ToDo> Done(int id);
+        Task<Entity.ToDo> Done(Entity.ToDo toDo);
     }
 }

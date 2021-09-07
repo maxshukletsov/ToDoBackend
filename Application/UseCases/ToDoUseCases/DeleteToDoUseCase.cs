@@ -16,7 +16,12 @@ namespace Application.UseCases.ToDoUseCases
 
         public override async Task<UseCaseResult> Work(DeleteTodoCommand command)
         {
-            var deletedToDo = await _toDoRepository.Delete(command.Id);
+            var toDo = await _toDoRepository.Get(command.Id);
+            if (toDo == null)
+                return Result.NotFound($"Задача с id: {command.Id} не найдена");
+            if (command.User != null && toDo.User != command.User)
+                return Result.Forbidden("У вас нет доступа к этой задаче");
+            var deletedToDo = await _toDoRepository.Delete(toDo);
             return Result.Ok(deletedToDo);
         }
     }

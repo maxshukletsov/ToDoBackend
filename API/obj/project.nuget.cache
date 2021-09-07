@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "dY10NVW6StWGltdsmCLngBmKCOqhQDy2Nx64yic3BqEU3CiUESoFOzpUu47v0oxNYtZVLb7omtQysvSK+HLk2A==",
+  "dgSpecHash": "V6/bYj+WkI0EDPwsFDqzOv+pjwQhfNuC46QV75y8C5t+L3s5Mxm6ks54Y8WUwc7lHGwmhqrxpDvedV6FDwvBlg==",
   "success": true,
   "projectFilePath": "/home/maxshukletsov/RiderProjects/ToDoBackend/API/API.csproj",
   "expectedPackageFiles": [

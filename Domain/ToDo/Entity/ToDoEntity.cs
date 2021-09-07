@@ -1,4 +1,5 @@
 using System;
+using Domain.ToDo.UseCases;
 
 namespace Domain.ToDo.Entity
 {
@@ -12,7 +13,7 @@ namespace Domain.ToDo.Entity
         public DateTime DateEnding { get; set; }
 
         public bool End { get; set; }
-        
+
         public User.Entity.User User { get; set; }
     };
 }

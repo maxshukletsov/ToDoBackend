@@ -23,11 +23,34 @@ namespace Domain.SeedWork
 
     public static class Result
     {
-        
+        // OK request
         public static UseCaseResult<TDataType> Ok<TDataType>(TDataType data, string message = "") =>
             new() { Status = UseCaseStatus.Ok, Data = data, Message = message };
 
         public static UseCaseResult Ok(string message = "") =>
             new() { Status = UseCaseStatus.Ok, Message = message };
+
+        // Bad Request
+
+        public static UseCaseResult<TDataType> BadRequest<TDataType>(TDataType data, string message = "") =>
+            new() { Status = UseCaseStatus.BadRequest, Data = data, Message = message };
+
+        public static UseCaseResult BadRequests(string message = "") =>
+            new() { Status = UseCaseStatus.BadRequest, Message = message };
+
+        // Not Found
+        public static UseCaseResult<TDataType> NotFound<TDataType>(TDataType data, string message = "") =>
+            new() { Status = UseCaseStatus.NotFound, Data = data, Message = message };
+
+        public static UseCaseResult NotFound(string message = "") =>
+            new() { Status = UseCaseStatus.NotFound, Message = message };
+
+        //Forbiden
+
+        public static UseCaseResult<TDataType> Forbidden<TDataType>(TDataType data, string message = "") =>
+            new() { Status = UseCaseStatus.Forbidden, Data = data, Message = message };
+
+        public static UseCaseResult Forbidden(string message = "") =>
+            new() { Status = UseCaseStatus.Forbidden, Message = message };
     }
 }

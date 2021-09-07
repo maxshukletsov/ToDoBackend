@@ -21,6 +21,10 @@ namespace Application.UseCases.ToDoUseCases
         public override async Task<UseCaseResult<ToDo>> Work(UpdateTodoCommand command)
         {
             var toDo = await _toDoRepository.Get(command.Id);
+            if (toDo == null)
+                return Result.NotFound(toDo,$"Задача с id: {command.Id} не найдена");
+            if (command.User != null && toDo.User != command.User)
+                return Result.Forbidden(toDo = null, "У вас нет доступа к этой задаче");
             var updateToDo = _mapper.Map(command.ToDo, toDo);
             var updatedToDo = await _toDoRepository.Update(command.Id, updateToDo);
             return Result.Ok(updatedToDo, $"Объект {command.Id} обновлен успешно");
